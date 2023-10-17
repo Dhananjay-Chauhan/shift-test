@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <title>ShapeShiftAI</title>
+    <!-- <title>Document</title> -->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <h2 class="mt-5">CAMERA APP</h2>
+          <button id="startButton">Start Camera</button>
+          <button id="stopButton" >Stop Camera</button>
+          <!-- <img src="{{ url_for('video_feed') }}" height="80%"> -->
+
+          
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const startButton = document.getElementById("startButton");
+    const stopButton = document.getElementById("stopButton");
+    startButton.addEventListener("click", function () {
+      // Send a request to start the camera
+      fetch("/start_camera", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((data) => {
+          if (data.success) {
+            console.log('success')
+          }
+        })
+        .catch((error) => {
+          console.error("Error what is :", error);
+        });
+      });
+      
+      stopButton.addEventListener("click", function () {
+        // Send a request to stop the camera
+        fetch("/stop_camera", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((data) => {
+          if (data.success) {
+            console.log('success')
+            
+          }
+        })
+        .catch((error) => {
+          console.error("Error what is:", error);
+        });
+    });
+  </script>
+</html>
+
+<!-- startButton.addEventListener('click', function() {
+      // Send a request to start the camera
+      $.get('/start_camera', function(response) {
+          if (response.success) {
+              startButton.disabled = true;
+              stopButton.disabled = false;
+          }
+      });
+  });
+  
+  stopButton.addEventListener('click', function() {
+      // Send a request to stop the camera
+      $.get('/stop_camera', function(response) {
+          if (response.success) {
+              startButton.disabled = false;
+              stopButton.disabled = true;
+          }
+      });
+  }); -->
